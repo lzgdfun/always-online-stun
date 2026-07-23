@@ -5,7 +5,8 @@ on:
   schedule:
     # Minute zero of every hour
     - cron: '0 * * * *'
-
+permissions:
+  contents: write
 env:
   CARGO_TERM_COLOR: always
   IS_BEHIND_NAT: true
@@ -24,11 +25,11 @@ jobs:
 
     steps:
     - name: Git checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v5
     - name: Set up system dependencies
       run: sudo apt-get update && sudo apt-get install resolvconf wireguard wireguard-tools
     - name: Enable build cache
-      uses: actions/cache@v3
+      uses: actions/cache@v6
       with:
         path: |
           ~/.cargo/bin/
@@ -58,6 +59,6 @@ jobs:
       id: create-timestamp
       run: echo "::set-output name=timestamp::$(echo $(date --utc))"
     - name: Git commit & push
-      uses: stefanzweifel/git-auto-commit-action@v4
+      uses: stefanzweifel/git-auto-commit-action@v6
       with:
         commit_message: Check ${{ steps.create-timestamp.outputs.timestamp }}
