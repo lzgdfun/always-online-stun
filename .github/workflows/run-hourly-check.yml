@@ -9,7 +9,7 @@ permissions:
   contents: write
 env:
   CARGO_TERM_COLOR: always
-  IS_BEHIND_NAT: true
+  IS_BEHIND_NAT: false
   RUST_LOG: info
   IPGEOLOCATIONIO_API_KEY: ${{ secrets.IPGEOLOCATIONIO_API_KEY }}
   WG_IFACE_PRIVATE_KEY: ${{ secrets.WG_IFACE_PRIVATE_KEY }}
